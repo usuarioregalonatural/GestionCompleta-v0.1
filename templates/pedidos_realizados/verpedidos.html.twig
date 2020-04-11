@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <!-- Principal Pagina -->
+    <div class="container" style="height: 100%; width: 100%">
+    <h4>Pedidos Realizados</h4>
+
+        {# dump(pedidos) #}
+    <div class="card-body">
+       <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha Pedido</th>
+                <th>Num Pedidos</th>
+                <th>Importe Pedidos</th>
+            </tr>
+            </thead>
+                {% for pedido in pedidos %}
+                    <tr>
+                        <td> {{ pedido.id }}</td>
+                        <td> {{ pedido.fechapedido | date('d/m/Y') }}</td>
+                        <td> {{ pedido.numpedidos }}</td>
+                        <td> {{ pedido.imppedidos }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
