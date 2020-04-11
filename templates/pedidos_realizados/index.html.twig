@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <!-- Principal Pagina -->
+    <div class="container" style="height: 100%; width: 100%; background-color: #c7ddef" >
+        <h3 class="col-md-4">Introduccion de datos</h3>
+
+        <!-- Muestra los botones de introduccion de datos -->
+         <div class="container-fluid" style="height:100%; width:100%;background-color:white">
+                {{ form(pedidosrealizadoscn) }}
+         </div>
+
+        <!-- Muestra la tabla de datos -->
+         <div class="container" style="height:100%; width:100%; background-color: white">
+             <h3 class="col-md-4">Tabla de datos</h3>
+
+        </div>
+
+    </div>
+
+{% endblock %}
