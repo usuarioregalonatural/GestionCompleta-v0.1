@@ -58,4 +58,73 @@ class PedidosRealizadosController extends AbstractController
             'pedidosrealizadoscn' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/verpedidosrealizados", name="verpedidosrealizados")
+     */
+    public function verpedidosrealizados()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositorio = $em->getRepository('App:PedidosRealizados');
+        $pedidos = $repositorio->findAll();
+        return $this->render('pedidos_realizados/verpedidos.html.twig',
+            array('pedidos'=>$pedidos));
+
+    }
+
+    /**
+     * @Route("/verpedidosrealizados/borra/{idpedido}", name="borrapedidosrealizados")
+     */
+    public function  borrapedidorealizado($idpedido)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pedido = $em->getRepository('App:PedidosRealizados')->find($idpedido);
+        if (!$pedido) {
+            throw $this->createNotFoundException(
+                'El pedido con ID: ' . $idpedido . ' no existe'
+            );
+        }
+        $em->remove($pedido);
+        $em->flush();
+        // Mostramos de nuevo todos los pedidos
+        $em = $this->getDoctrine()->getManager();
+        $repositorio = $em->getRepository('App:PedidosRealizados');
+        $pedidos = $repositorio->findAll();
+
+        return $this->render('pedidos_realizados/verpedidos.html.twig',
+            array('pedidos'=>$pedidos));
+    }
+
+    /**
+     * @Route("/verpedidosrealizados/actualiza/{idpedido}", name="actpedidosrealizados")
+     */
+    public function  actualizarpedidorealizado($idpedido)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pedido = $em->getRepository('App:PedidosRealizados')->find($idpedido);
+        if (!$pedido) {
+            throw $this->createNotFoundException(
+                'El pedido con ID: ' . $idpedido . ' no existe'
+            );
+        }
+        // Actualizamos
+        $pedido->setFechapedido(new \DateTime('2020-04-11'));
+        $pedido->setNumpedidos(1);
+        $pedido->setImppedidos(1);
+        $em->flush();
+
+        // Mostramos de nuevo todos los pedidos
+        $em = $this->getDoctrine()->getManager();
+        $repositorio = $em->getRepository('App:PedidosRealizados');
+        $pedidos = $repositorio->findAll();
+
+        return $this->render('pedidos_realizados/verpedidos.html.twig',
+            array('pedidos'=>$pedidos));
+
+
+    }
+
+
+
+
 }
