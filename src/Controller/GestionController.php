@@ -9,10 +9,11 @@
 namespace App\Controller;
 
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GestionController
+class GestionController extends AbstractController
 {
     /**
      * @Route("/")
@@ -27,9 +28,10 @@ class GestionController
      */
     public function show($slug)
     {
-        return new Response(sprintf(
-            'Esta es una página nueva número: %s',
-            $slug
-        ));
+        dump($slug, $this);
+
+        return $this->render('gestion/show.html.twig', [
+          'title' => ucwords(str_replace('-', '', $slug)) ,
+        ]);
     }
 }
