@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <!-- Principal Pagina -->
+    <div class="container" style="height: 100%; width: 100%">
+    <h4>Datos Publicidad</h4>
+
+        {# dump(datos) #}
+    <div class="card-body">
+       <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Medio</th>
+                <th>Impresiones</th>
+                <th>Clicks</th>
+                <th>CTR</th>
+                <th>Coste</th>
+            </tr>
+            </thead>
+                {% for dato in datos %}
+                    <tr>
+                        <td> {{ dato.id }}</td>
+                        <td> {{ dato.fecha | date('d/m/Y') }}</td>
+                        <td> {{ dato.medio }}</td>
+                        <td> {{ dato.impresiones }}</td>
+                        <td> {{ dato.clicks }}</td>
+                        <td> {{ dato.ctr }}</td>
+                        <td> {{ dato.coste }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -59,4 +59,41 @@ class DatospubliController extends AbstractController
             'datospublicn' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/verdatospubli", name="verdatospubli")
+     */
+    public function verdatospubli()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositorio = $em->getRepository('App:Datospubli');
+        $datos = $repositorio->findAll();
+        return $this->render('datospubli/verdatospubli.html.twig',
+            array('datos'=>$datos));
+
+    }
+
+    /**
+     * @Route("/datospubli/borra/{id}", name="borradatospubli")
+     */
+    public function  borradatospubli($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dato = $em->getRepository('App:Datospubli')->find($id);
+        if (!$dato) {
+            throw $this->createNotFoundException(
+                'El pedido con ID: ' . $id . ' no existe'
+            );
+        }
+        $em->remove($dato);
+        $em->flush();
+        // Mostramos de nuevo todos los pedidos
+        $em = $this->getDoctrine()->getManager();
+        $repositorio = $em->getRepository('App:Datospubli');
+        $datos = $repositorio->findAll();
+
+        return $this->render('datospubli/verdatospubli.html.twig',
+            array('datos'=>$datos));
+    }
+
 }
