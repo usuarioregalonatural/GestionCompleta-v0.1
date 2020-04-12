@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Visitas;
+use PhpParser\JsonDecoder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -10,6 +11,13 @@ use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\LineChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Timeline;
+use Symfony\Component\Validator\Constraints\DateTime;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\WordTree;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\AnnotationChart;
 
 
 class VisitasController extends AbstractController
@@ -85,6 +93,26 @@ class VisitasController extends AbstractController
 
         return $this->render('visitas/vervisitas.html.twig',
             array('visitas'=>$visitas));
+    }
+
+    /**
+     * @Route("/graficovisitas", name="graficovisitas")
+     */
+    public function graficovisitas()
+    {
+        $encoders = array(new JsonDecoder());
+        $normalizers = array(new Ge);
+
+
+// Grafico
+
+
+//
+
+
+        return $this->render('visitas/graficovisitas.html.twig',
+            array('piechart' => $pieChart));
+
     }
 
 }
