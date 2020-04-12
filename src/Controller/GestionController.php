@@ -20,7 +20,10 @@ class GestionController extends AbstractController
      */
     public function homepage()
     {
-        return new Response('Vaya, vaya, vaya!!!');
+        return $this->render('index/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+//        return new Response('Vaya, vaya, vaya!!!');
     }
 
     /**
