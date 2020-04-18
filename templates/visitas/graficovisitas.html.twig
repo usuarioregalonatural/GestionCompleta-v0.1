@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <!-- Principal Pagina -->
+    <div class="container" style="height: 100%; width: 100%">
+    <h4>Visitas Recibidas</h4>
+
+        {# dump(pedidos) #}
+    <div class="card-body">
+
+        <div id="div_chart"></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+
+        </div>
+    </div>
+
+{% endblock %}
